@@ -1,0 +1,166 @@
+<mat-toolbar style="background-color: #1C93ED;">
+  <span>
+    <img src="../../assets/img/logo.png" style="padding-left:2vh;" width="100" height="30">
+  </span>
+
+  <span class="fill-remaining-space"></span>
+  <button mat-button>Exchange Rate Update</button>
+  <button mat-button>Menu 02</button>
+  <button mat-button (click)="logout()">Logout</button>
+
+</mat-toolbar>
+
+<body>
+<section id="update-rate">
+
+
+
+
+  <mat-grid-list cols="4" style=" margin: 5vh 5vh 0vh 5vh;" rowHeight="500px">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <mat-card class="update-card" style="height: 90%;width: 90%;">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Exchange Rate Update</mat-card-title>
+          <mat-card-subtitle>Official : {{nameLogin}}</mat-card-subtitle>
+
+
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile>
+              <mat-form-field style="width: 95%;" matTooltip="Select currency for update">
+                <mat-select [(ngModel)]="currencySelect" placeholder="Select Currency To Update">
+                  <mat-option *ngFor="let currency of currencys" [value]="currency.currencyCode">
+                    {{currency.currencyCode}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+
+          <mat-grid-list cols="2" rowHeight="100px">
+            <mat-grid-tile>
+              <mat-form-field style="width: 90%;">
+                <input [(ngModel)]="buyPriceInput" matInput type="number" placeholder="Bank Buying Rate" matTooltip="Input bank notes
+          buying rates" />
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-form-field style="width: 90%;">
+                <input [(ngModel)]="sellPriceInput" matInput type="number" placeholder="Bank Selling Rate" matTooltip="Input bank notes
+          selling rates" />
+
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-slide-toggle [(ngModel)]="checkedDateReal" (change)="setDate()" matTooltip="On/off real date">Real
+                Time</mat-slide-toggle>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-form-field style="width: 90%;" matTooltip="Click logo for open datepicker">
+                <input [(ngModel)]="dateReal" [disabled]="checkedDateReal" matInput [matDatepicker]="picker"
+                  placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
+
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-grid-list cols="3" rowHeight="100px">
+
+            <mat-grid-tile>
+              <button matTooltip="Click for Update Price Rate" (click)="editAndupdateRate()" mat-stroked-button color="primary">{{editAndUpdate_btn}}</button>
+            </mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile>
+              <button matTooltip="Back to Home Page" mat-stroked-button color="warn">Cancel</button>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="show-log-update" style="height: 90%;width: 80%;">
+        <mat-card-header>
+          <mat-card-title>Update today {{dateNow}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let expansion of expansions">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{expansion.currency.currencyCode}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span class="fill-remaining-space"></span>
+                  {{expansion.buyPrice.price}}/{{expansion.sellPrice.price}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <button matTooltip="Click for Edit Price Rate" (click)="editRate(expansion.exchangeRateID)" mat-button
+                color="primary">Edit</button>
+              <button matTooltip="Click for Delete Price Rate" (click)="deleteRate(expansion.exchangeRateID)"
+                mat-button color="warn">Delete</button>
+
+            </mat-expansion-panel>
+
+          </mat-accordion>
+        </mat-card-content>
+
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</section>
+
+  <section class="page" id="historical-rate" >
+    <h1 style="color:black;font-size: 3rem;text-align: center;padding-top:20vh; " class="font-main">Historical Rate
+      Tables</h1>
+
+   
+    <br>
+
+    <div>
+      <mat-form-field  style="width: 90%;margin-left: 5%;margin-right: 5%;"> 
+        <input  style="width: 100%;margin: auto auto;" matInput [(ngModel)]="dateInputHis" [matDatepicker]="picker2" (ngModelChange)="dateChange($event)" placeholder="Choose a date (MM/DD/YYYY)">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <br>
+
+    <div style="padding-bottom:15vh;width: 90%;margin-left: 5%;margin-right: 5%;">
+      <table mat-table  style="width: 100%;margin: auto auto;" [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="currencyCode">
+          <th mat-header-cell *matHeaderCellDef>Currency code</th>
+          <td mat-cell *matCellDef="let element"> {{element.currency.currencyCode}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="currencyName">
+          <th mat-header-cell *matHeaderCellDef>Currency Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.currency.currencyName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="curSelect">
+          <th mat-header-cell *matHeaderCellDef> Units per THB </th>
+          <td mat-cell *matCellDef="let element"> {{element.sellPrice.price}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <br>
+  </section>
+</body>

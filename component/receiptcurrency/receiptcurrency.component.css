@@ -1,0 +1,16 @@
+.printbutton,.backbutton{    
+    min-width: 80px;
+    height: 40px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+}
+.printbutton{   background-color: #08df3e;}
+.backbutton{    background-color: #5a5553;}
+.printbutton:hover,.backbutton:hover{  box-shadow: 0 3px #666;} /*ตอนชี้*/
+.printbutton:active{    /*ตอนกด*/
+    background-color: #9ebe0d;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

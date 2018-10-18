@@ -1,0 +1,94 @@
+mat-card {
+
+    max-width: 35% ;
+    margin: auto auto;
+    text-align: center;
+   
+  }
+  mat-card profile{
+    max-width: 60% ;
+    margin: auto auto;
+    text-align: center;
+  }
+  .signin-content {
+    padding: 20vh 1rem ;
+  }
+  .full-width-input {
+    width: 100%;
+  }
+  
+/*.main-navigation-bar{
+    background-color: transparent;
+    position: fixed;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.main-navigation-bar :hover{    background: #343A40;}
+li {    float:right;}
+li,a[id = name],a[id = about],a[id = contact],a[id = news],a[id = home],a[id = branch],a[id = username],a[id = myprofile] { 
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;    
+}
+  body{
+      background: linear-gradient(270deg, #37c5a0, #c58a37);
+    background-size: 400% 400%;
+      min-height: 150vh;
+    height: 100%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+    }
+  .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      padding: 10px;
+    }
+    .grid-item {
+      padding: 1px;   
+      font-size: 20px;
+    }   
+    input[type = text]{
+        width: 80%;
+        padding: 10px;               
+        margin: 1px 0 1px 0;          
+        border: none;                    
+        background: #f1f1f1;          
+      }
+      .botton {
+        height:50px ;
+        background-color: rgb(13, 107, 230);     /
+        color: white;
+        padding: 16px 25px;
+        margin: 8px 0;
+        border: none;    
+        width: 80%;
+        font-size: 25px;
+     
+    }
+
+
+
+
+
+
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+    @keyframes AnimationName { 
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }*/
